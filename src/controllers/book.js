@@ -27,7 +27,7 @@ module.exports = {
 
   async getBooksById(req, res) {
     try {
-      const { params: { id } } = req.params
+      const { params: { id } } = req
       const response = await queries.getOneObjectByParams(Book, { '_id': id }, [])
       res.status(200).json(response)
     } catch(err) {
@@ -39,7 +39,7 @@ module.exports = {
   async updateBook(req, res) {
     try {
       const { body, params: { id } } = req
-      const response = await queries.updateObjectsByParams(Book, { '_id': id }, body)
+      const response = await queries.updateObjectsByParams(Book, { '_id': id }, { ...body, updatedAt: new Date() })
       res.status(200).json(response)
     } catch(err) {
       console.log(err)
@@ -49,7 +49,7 @@ module.exports = {
 
   async deleteBook(req, res) {
     try {
-      const { params: { id } } = req.params
+      const { params: { id } } = req
       const response = await queries.deleteObjectsByParams(Book, { '_id': id })
       res.status(200).json(response)
     } catch(err) {

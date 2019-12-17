@@ -2,7 +2,7 @@
 
 const mongoose = require('mongoose')
 const app = require('./')
-const config = require('./config')
+const { port, db, secret } = require('./config')
 
 mongoose.Promise = global.Promise
 
@@ -12,14 +12,14 @@ const mongooseConntectOptions = {
   useUnifiedTopology: true
 }
 
-mongoose.connect(config.db, mongooseConntectOptions,  (err) => {
-  if(err) {
+mongoose.connect(db, mongooseConntectOptions,  (err) => {
+  if (err) {
     console.log(`DATABASE connection problem ${err}`)
-  }else {
-    console.log(`Successfully connected to ${config.db}`)
+  } else {
+    console.log(`Successfully connected to ${db}`)
   }
 })
 
-app.listen(config.port, () => {
-  console.log(`server successfully running on port: ${ config.port }`)
+app.listen(port, () => {
+  console.log(`server successfully running on port: ${ port }`)
 })
