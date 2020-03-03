@@ -12,13 +12,9 @@ const mongooseConntectOptions = {
   useUnifiedTopology: true
 }
 
-mongoose.connect(db, mongooseConntectOptions,  (err) => {
-  if (err) {
-    console.log(`DATABASE connection problem ${err}`)
-  } else {
-    console.log(`Successfully connected to ${db}`)
-  }
-})
+mongoose.connect(db, mongooseConntectOptions)
+.then(() => console.log('MongoDB Connected'))
+.catch(err => console.log(err));
 
 app.listen(port, () => {
   console.log(`server successfully running on port: ${ port }`)
